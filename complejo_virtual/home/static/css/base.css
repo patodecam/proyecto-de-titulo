@@ -1,0 +1,113 @@
+/* Lnieas verdes con animacion navbar */
+
+.nav-item:not(.dropdown) .nav-link {
+    margin-right: 20px;
+    padding: 10px;
+    text-decoration: none;
+    color:inherit;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font: size 1.1rem;
+    position: relative; 
+}
+
+.nav-item:not(.dropdown) .nav-link:after{
+    content:"";
+    width: 0;
+    height: 5px;
+    background-color: green;
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transition: all.5s;
+    will-change: width;
+
+}
+
+.nav-item:not(.dropdown) .nav-link:hover:after {
+    width:100% ;
+    right: 0;
+}
+
+/* Lineas verde con animacion menu */
+
+.dropdown {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    padding-top: 2px;
+    text-decoration: none;
+    position: relative;
+    color: #8B4513;
+}
+
+.dropdown:after {
+    content: "";
+    width: 0;
+    height: 5px;
+    background-color: green;
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transition: all 0.5s;
+    will-change: width;
+    
+}
+
+/* Ajuste para cuando el menú está abierto */
+.dropdown:focus-within:after {
+    width: 100%;
+    right: 0;
+    
+}
+
+/* Footer copyright. */
+
+.copyright{
+    padding-top: 10px;
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #228B22
+}
+
+/* Footer logo. */
+
+.img-fluid {
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto; 
+    padding: 10px; 
+    box-sizing: border-box; 
+}
+
+
+/* Footer nuestra mision */
+.parrafo-footer {
+    margin-top: 15px;
+    text-align: justify;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 5px;
+    color: #0077be;
+    
+  }
+
+.titulo-footer{
+    padding-top: 10px;
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 30px;
+    color: #8B4513
+  }
+
+  /* Footer contacto */
+.icono{
+    width: 30px;
+    height: 30px;
+    margin-right :10px ; 
+}
+
+.icon-container{
+    padding-top: 20px;
+    
+}
+
+
