@@ -1,0 +1,43 @@
+/* static/css/styles.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+main {
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.carousel-item img {
+    border-radius: 8px;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+#intro-paragraph {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+#reserve-button button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+}
+
+#calendar {
+    margin-top: 20px;
+}
