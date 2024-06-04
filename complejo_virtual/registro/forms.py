@@ -1,5 +1,7 @@
 import re
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate
 from .models import Usuario
 
 class Formularioregistro(forms.ModelForm):
@@ -180,6 +182,24 @@ class Formularioregistro(forms.ModelForm):
             ),
         }
 
+class Formulariologin(AuthenticationForm):
+    username = forms.EmailField(label='Correo electrónico', max_length=254. ,widget=forms.EmailInput)
+    password=forms.CharField(label='Contraseña',min_length=8,required=True ,widget=forms.PasswordInput)
+
+    def clean(self):
+        email = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+
+        if email and password:
+            self.user_cache = authenticate(self.request, username=email, password=password)
+            if self.user_cache is None:
+                raise forms.ValidationError('Usuario o contraseña incorrectos.')
+            elif not self.user_cache.is_active:
+                raise forms.ValidationError('Esta cuenta está inactiva.')
+        return self.cleaned_data
+      
+    
+        
     
     
         
