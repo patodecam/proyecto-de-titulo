@@ -1,11 +1,22 @@
-$(document).ready(function(){
-    $("#datepicker").datepicker({
-        dateFormat: "yy-mm-dd",
-        beforeShowDay: function(date) {
-            var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-            return [ availableDates.indexOf(string) != -1 ]
-        }
-    });
-});
+import { Calendar } from '@fullcalendar/core'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import bootstrap5Plugin from '@fullcalendar/bootstrap5'
 
-const availableDates = ["2024-05-20", "2024-05-21", "2024-05-22"]; // Sample dates for demonstration
+document.addEventListener('DOMContentLoaded', function() {
+  const calendarEl = document.getElementById('calendar')
+  const calendar = new Calendar(calendarEl, {
+    plugins: [
+      dayGridPlugin,
+      bootstrap5Plugin
+    ],
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    },
+    events: [
+      { title: 'Meeting', start: new Date() }
+    ]
+  })
+  calendar.render()
+})

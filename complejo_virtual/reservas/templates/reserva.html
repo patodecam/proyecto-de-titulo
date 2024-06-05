@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Reservar{% endblock %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/reserva.css' %}">
+{% endblock %}
+{% block content %}
+<body>
+    <main>
+            <div class="container-md">
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        
+            <div class="container-md">
+                <form method="POST" id="formularioReserva">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="cantidad_personas">Cantidad de personas: </label>
+                        <input type="number" id="cantidad_personas" name="cantidad_personas" placeholder="Ingrese la cantidad de personas" class="form-control" >
+                        <div class="error-message" id="errorCantidadPersonas"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha">Fecha de reserva: </label>
+                        <input type="date" id="fecha" name="fecha" placeholder="Seleccione la fecha de reserva" class="form-control">
+                        <div class="error-message" id="errorFecha"></div>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" id="aceptar_terminos" name="aceptar_terminos" class="form-check-input" >
+                        <label for="aceptar_terminos" class="form-check-label">Acepto los términos y condiciones</label>
+                        <div class="error-message" id="errorTerminosCondiciones"></div>
+                    </div>
+                    <div class="btn-contenedor">
+                        <button type="submit" id="btn-reservar" class="btn btn-primary">Reservar</button>
+                    </div>
+                </form>
+            </div>
+        
+        
+    </main>
+{% block script %}
+<script src="{% static 'js/reserva.js' %}"></script>
+{% endblock %}
+</body>
+{% endblock %}

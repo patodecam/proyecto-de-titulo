@@ -5,3 +5,6 @@ from django.shortcuts import render
 #Home view
 def home(request):
     return render (request , 'home.html' )
+
+def servicios(request):
+    return render (request , 'servicios.html' )
