@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=}, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Título predeterminado{% endblock %}</title>
     {% load static %}
      <!--Icono -->
@@ -35,7 +35,7 @@
                       <a class="nav-link" href="#">Servicios</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Reservar</a>
+                      <a class="nav-link" href="{% url 'reserva' %}">Reservar</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="#">Referencias</a>
