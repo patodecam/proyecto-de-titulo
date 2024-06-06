@@ -4,14 +4,15 @@
 {% load static %}
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 {% endblock %}
 
 {% block content %}
 <body>
-    <header class="bg-success text-white text-center py-4">
+    <header class="bg-success text-white text-center py-4 animate__animated animate__fadeInDown">
         <h1>Bienvenido al Complejo</h1>
     </header>
-     <main class="container my-4">
+    <main class="container my-4">
         <!-- Carrusel de infografías -->
         <section id="infographics-carousel" class="mb-4">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -22,7 +23,7 @@
                 </div>
                 <div class="carousel-inner">
                     {% for infografia in infografias %}
-                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="carousel-item {% if forloop.first %}active{% endif %} animate__animated animate__zoomIn">
                             <img src="{% static infografia %}" class="d-block w-100" alt="Infografía {{ forloop.counter }}">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>Infografía {{ forloop.counter }}</h5>
@@ -44,15 +45,10 @@
 
         <!-- Párrafo introductorio -->
         <section id="intro-paragraph" class="mb-4">
-            <p>
+            <p class="animate__animated animate__fadeInUp">
                 Bienvenido al Complejo Virtual, el mejor lugar para tus vacaciones. Nuestra misión es proporcionar una experiencia inolvidable con los mejores servicios y comodidades.
             </p>
         </section>
-
-        <!-- Botón "Reservar" -->
-        <!-- <section id="reserve-button" class="mb-4">
-            <button class="btn btn-success" onclick="location.href='reservar.html'">Reservar</button>
-        </section> -->
 
         <!-- Calendario de fechas disponibles -->
         <div id="calendar" class="card"></div>

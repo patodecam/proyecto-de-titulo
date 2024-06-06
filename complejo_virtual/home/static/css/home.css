@@ -1,15 +1,14 @@
-/* static/css/styles.css */
+/* static/css/home.css */
 
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f8f9fa;
     color: #333;
-}    
-
-#calendar {
-    max-width: 1100px;
-    padding: 50px;
-    margin: 0 auto;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header h1 {
@@ -22,10 +21,20 @@ main {
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+main:hover {
+    transform: scale(1.01);
 }
 
 .carousel-item img {
     border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.carousel-item img:hover {
+    transform: scale(1.05);
 }
 
 .carousel-caption {
@@ -37,9 +46,52 @@ main {
 #intro-paragraph {
     font-size: 1.2em;
     margin-bottom: 20px;
+    padding: 20px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#reserve-button button {
-    padding: 10px 20px;
-    font-size: 1.2em;
+#calendar {
+    max-width: 1100px;
+    padding: 50px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* FullCalendar styles */
+.fc {
+    font-family: 'Arial', sans-serif;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.fc-toolbar-title {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.fc-daygrid-day {
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.fc-daygrid-day:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.02);
+}
+
+.fc-button-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.fc-button-primary:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+    transform: scale(1.05);
 }

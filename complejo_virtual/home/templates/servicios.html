@@ -1,67 +1,61 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Servicios{% endblock %}
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/servicios.css' %}">
 <body>
     <header class="bg-success text-white text-center py-4">
-        <h1>Bienvenido al Complejo</h1>
+        <h1>Servicios</h1>
     </header>
-     <main class="container my-4">
-        <!-- Carrusel de infografías -->
-        <section id="infographics-carousel" class="mb-4">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    {% for infografia in infografias %}
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
-                    {% endfor %}
-                </div>
-                <div class="carousel-inner">
-                    {% for infografia in infografias %}
-                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                            <img src="{% static infografia %}" class="d-block w-100" alt="Infografía {{ forloop.counter }}">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Infografía {{ forloop.counter }}</h5>
-                                <p>Descripción de la infografía {{ forloop.counter }}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
+    
+    <main class="container my-4">
+        <!-- Explanation of Services -->
+        <section id="services">
+            <h2 class="section-title">Explicación de los Servicios</h2>
+            <p>En nuestro complejo digital, ofrecemos una variedad de servicios para satisfacer sus necesidades. Puede reservar piscinas, acceder a instalaciones deportivas y disfrutar de eventos especiales organizados en nuestras instalaciones.</p>
         </section>
 
-        <!-- Párrafo introductorio -->
-        <section id="intro-paragraph" class="mb-4">
-            <p>
-                Bienvenido al Complejo Virtual, el mejor lugar para tus vacaciones. Nuestra misión es proporcionar una experiencia inolvidable con los mejores servicios y comodidades.
-            </p>
+        <!-- Business Rules -->
+        <section id="business-rules" class="mt-5">
+            <h2 class="section-title">Reglas del Negocio</h2>
+            <ul>
+                <li>Las reservas deben realizarse con al menos 24 horas de antelación.</li>
+                <li>Las cancelaciones deben notificarse con un mínimo de 12 horas de antelación.</li>
+                <li>El uso de las instalaciones está sujeto a las normas y regulaciones del complejo.</li>
+            </ul>
         </section>
 
-        <!-- Botón "Reservar" -->
-        <section id="reserve-button" class="mb-4">
-            <button class="btn btn-success" onclick="location.href='reservar.html'">Reservar</button>
-        </section>
-
-        <!-- Calendario de fechas disponibles -->
-        <section id="calendar" class="mb-4">
-            <h2>Fechas Disponibles</h2>
-            <input type="text" id="datepicker" class="form-control">
+        <!-- Administrator Interface -->
+        <section id="admin-interface" class="mt-5">
+            <h2 class="section-title">Interfaz de Administración</h2>
+            <p>Como administrador, puede gestionar los servicios de manera detallada. A continuación, se muestra una interfaz de ejemplo:</p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Reserva de Piscina</td>
+                        <td>Permite a los usuarios reservar una piscina para una fecha y hora específicas.</td>
+                        <td>
+                            <button class="btn btn-primary">Editar</button>
+                            <button class="btn btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
         </section>
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-qww1LZPKE6MZHZXjwZ8/Rj2w1O59FEFWmeFfmxO7mWkmQ6vrYV/3Ijk/DB6F7zFF" crossorigin="anonymous"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="{% static 'js/home.js' %}"></script>
+    <script src="{% static 'js/servicios.js' %}"></script>
 </body>
 {% endblock %}

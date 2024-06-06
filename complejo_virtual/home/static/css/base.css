@@ -1,34 +1,37 @@
-/* Lnieas verdes con animacion navbar */
+/* Navbar green lines with animation */
 
 .nav-item:not(.dropdown) .nav-link {
     margin-right: 20px;
     padding: 10px;
     text-decoration: none;
-    color:#1E0342;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font: size 1.1rem;
+    color: #1E0342;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.1rem;
     position: relative; 
+    transition: color 0.3s ease;
 }
 
-.nav-item:not(.dropdown) .nav-link:after{
-    content:"";
+.nav-item:not(.dropdown) .nav-link:after {
+    content: "";
     width: 0;
     height: 5px;
     background-color: #9DDE8B;
     position: absolute;
     bottom: 0;
-    right: 50%;
-    transition: all.5s;
-    will-change: width;
+    left: 50%;
+    transition: width 0.5s ease, left 0.5s ease;
+}
 
+.nav-item:not(.dropdown) .nav-link:hover {
+    color: #9DDE8B;
 }
 
 .nav-item:not(.dropdown) .nav-link:hover:after {
-    width:100% ;
-    right: 0;
+    width: 100%;
+    left: 0;
 }
 
-/* Lineas verde con animacion menu */
+/* Dropdown green lines with animation */
 
 .dropdown {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -37,6 +40,7 @@
     text-decoration: none;
     position: relative;
     color: #8B4513;
+    transition: color 0.3s ease;
 }
 
 .dropdown:after {
@@ -46,67 +50,114 @@
     background-color: #9DDE8B;
     position: absolute;
     bottom: 0;
-    right: 50%;
-    transition: all 0.5s;
-    will-change: width;
-    
+    left: 50%;
+    transition: width 0.5s ease, left 0.5s ease;
 }
 
-/* Ajuste para cuando el menú está abierto */
-.dropdown:focus-within:after {
+.dropdown:hover, .dropdown:focus-within {
+    color: #9DDE8B;
+}
+
+.dropdown:focus-within:after, .dropdown:hover:after {
     width: 100%;
-    right: 0;
-    
+    left: 0;
 }
 
-/* Footer copyright. */
+/* Footer copyright */
 
-.copyright{
+.copyright {
     padding-top: 10px;
     text-align: center;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: #40A578
+    color: #40A578;
+    font-size: 0.9rem;
+    border-top: 1px solid #9DDE8B;
+    margin-top: 20px;
+    padding-top: 20px;
+    transition: color 0.3s ease;
 }
 
-/* Footer logo. */
+.copyright:hover {
+    color: #1E0342;
+}
+
+/* Footer logo */
 
 .img-fluid {
-    max-width: 100%; 
-    height: auto; 
-    display: block; 
-    margin: 0 auto; 
-    padding: 10px; 
-    box-sizing: border-box; 
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
 }
 
+.img-fluid:hover {
+    transform: scale(1.05);
+}
 
-/* Footer nuestra mision */
+/* Footer our mission */
+
 .parrafo-footer {
     padding-top: 10px;
     text-align: justify;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 5px;
     color: #03AED2;
-    
-  }
+    font-size: 1rem;
+    line-height: 1.6;
+    transition: color 0.3s ease;
+}
 
-.titulo-footer{
+.parrafo-footer:hover {
+    color: #1E0342;
+}
+
+.titulo-footer {
     padding-top: 10px;
     text-align: center;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 30px;
-    color: #B19470
-  }
+    color: #B19470;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
 
-  /* Footer contacto */
-.icono{
+.titulo-footer:hover {
+    color: #1E0342;
+}
+
+/* Footer contact */
+
+.icono {
     width: 30px;
     height: 30px;
-    margin-right :10px ; 
+    margin-right: 10px;
+    transition: transform 0.3s ease;
 }
 
-.icon-container{
+.icono:hover {
+    transform: scale(1.1);
+}
+
+.icon-container {
     padding-top: 10px;
-    
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
+.icon-container a {
+    color: #03AED2;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.icon-container a:hover {
+    color: #1E0342;
+}
+
+.icon-container a:visited {
+    color: #03AED2;
+}

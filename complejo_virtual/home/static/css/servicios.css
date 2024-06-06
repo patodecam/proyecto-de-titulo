@@ -1,0 +1,21 @@
+body {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+.header {
+    background-color: #3498db;
+}
+.header .navbar-brand, .header .nav-link {
+    color: white !important;
+}
+.section-title {
+    color: #3498db;
+}
+.btn-primary {
+    background-color: #2ecc71;
+    border: none;
+}
+.btn-danger {
+    background-color: #e74c3c;
+    border: none;
+}
