@@ -4,6 +4,12 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: #f8f9fa;
     color: #333;
+}    
+
+#calendar {
+    max-width: 1100px;
+    padding: 50px;
+    margin: 0 auto;
 }
 
 header h1 {
