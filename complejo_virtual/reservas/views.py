@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import Formularioreserva
 from .models import Reserva
+from core.email_sender import enviar_correo
+import datetime
 # Create your views here.
 
 @login_required
@@ -21,10 +23,28 @@ def reserva(request):
                 terminosCondiciones=aceptar_terminos
             )
             reserva.save()
-            messages.success(request, 'Tu reserva ha sido creada exitosamente.')
+            
+            destinatario=request.user.correo
+            primernombre = request.user.primerNombre     
+            primerapellido =request.user.primerApellido  
+            nombrecompleto = f"{primernombre} {primerapellido}"
+            asunto = "Confirmación de Reserva"
+            plantilla = 'core/plantilla_confirmacion_reserva.html'
+            contexto = {
+                    'nombre': nombrecompleto,
+                    'fecha': fecha,
+                    'cantidad_personas': cantidad_personas,
+                    
+                }
+            
+            try:
+                enviar_correo(destinatario, asunto, plantilla, contexto)
+                messages.success(request, 'Tu reserva ha sido creada exitosamente y se ha enviado un correo de confirmación.')
+            except Exception as e:
+                messages.error(request, f'Error al enviar el correo de confirmación: {str(e)}')
         else:
             print("Errores del formulario:", form.errors)
-            messages.error(request, 'Por favor corrige los errores a continuación.')
+            messages.error(request, 'Esta fecha ya se encuentra reservada.')
     else:
         form = Formularioreserva()
     
