@@ -1,10 +1,10 @@
 from django.shortcuts import render
+from reservas.models import Reserva
+from datetime import datetime, timedelta
 
-# Create your views here.
-
-#Home view
 def home(request):
-    return render (request , 'home.html' )
+    reservas = Reserva.objects.all()
+    return render(request, 'home.html', {'reservas': reservas})
 
 def servicios(request):
-    return render (request , 'servicios.html' )
+    return render(request, 'servicios.html')

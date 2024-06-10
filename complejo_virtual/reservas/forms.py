@@ -1,3 +1,4 @@
+# forms.py
 from django import forms
 from .models import Reserva
 from datetime import date, timedelta
@@ -11,7 +12,7 @@ class Formularioreserva(forms.Form):
             attrs={
                 'class': 'form-control',
                 'placeholder': 'Ingrese la cantidad de personas',
-                'id': 'cantidadpersonas',
+                'id': 'cantidad_personas',
                 'required': 'required',
             }
         )
@@ -22,7 +23,7 @@ class Formularioreserva(forms.Form):
             attrs={
                 'class': 'form-control',
                 'placeholder': 'Seleccione la fecha de reserva',
-                'id': 'fecha',
+                'id': 'fecha_creacion',
                 'type': 'date',
                 'required': 'required',
             }
@@ -45,7 +46,7 @@ class Formularioreserva(forms.Form):
         diadereserva = hoy + timedelta(days=5)
         if fecha <= diadereserva:
             raise forms.ValidationError('La fecha de reserva debe ser al menos con 5 días de anticipación.')
-        if Reserva.objects.filter(fecha=fecha).exists():
+        if Reserva.objects.filter(fecha_creacion=fecha).exists():  # Corrección aquí
             raise forms.ValidationError('Esta fecha ya está reservada.')
         return fecha
 
