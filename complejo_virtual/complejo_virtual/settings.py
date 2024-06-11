@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'home',
     'registro',
     'reservas',
+    'referencias',
 ]
 
 MIDDLEWARE = [
@@ -126,6 +127,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'home' / 'static',
     BASE_DIR / 'registro' / 'static',
     BASE_DIR / 'reservas' / 'static',
+    BASE_DIR / 'referencias' / 'static',
 ]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'

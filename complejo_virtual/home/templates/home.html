@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
       events: [
           {% for reserva in reservas %}
               {
-                  title: "{{ reserva.id_reserva }}",
+                  title: "Id de reserva: {{  reserva.id_reserva }}",
                   start: '{{ reserva.fecha_creacion|date:"Y-m-d" }}',
                   allDay: true
               },

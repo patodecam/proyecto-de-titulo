@@ -2,20 +2,41 @@ body {
     background-color: #ecf0f1;
     color: #2c3e50;
 }
+
 .header {
     background-color: #3498db;
 }
+
 .header .navbar-brand, .header .nav-link {
     color: white !important;
 }
+
 .section-title {
     color: #3498db;
 }
+
 .btn-primary {
     background-color: #2ecc71;
     border: none;
+    padding: 10px 20px; /* Añadido para ajustar el tamaño del botón */
+    border-radius: 30px; /* Añadido para hacer el botón redondeado */
+    cursor: pointer; /* Añadido para cambiar el cursor al pasar por encima */
+    transition: background-color 0.3s ease; /* Añadida una transición para suavizar el cambio de color */
 }
+
+.btn-primary:hover {
+    background-color: #27ae60; /* Cambio de color al pasar el ratón por encima */
+}
+
 .btn-danger {
     background-color: #e74c3c;
     border: none;
+}
+
+/* Centrado del botón */
+.centered-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
