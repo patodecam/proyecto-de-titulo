@@ -3,22 +3,17 @@
 {% block title %}Referencias{% endblock %}
 {% load static %}
 
-{% block content %}
+{% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/referencias.css' %}">
+{% endblock %}
+
+{% block content %}
 <body>
     <header class="bg-success text-white text-center py-4">
         <h1>Referencias</h1>
     </header>
     
     <main class="container my-4">
-        <div class="referencia-form">
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Enviar Referencia</button>
-            </form>
-        </div>
-
         <div class="lista-referencias my-4">
             <h2>Lista de Comentarios</h2>
             <ul>
@@ -31,6 +26,13 @@
                     </li>
                 {% endfor %}
             </ul>
+        </div>
+        <div class="referencia-form">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Enviar Referencia</button>
+            </form>
         </div>
     </main>
     

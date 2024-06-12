@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'registro',
     'reservas',
     'referencias',
+    'webpay',
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'registro' / 'static',
     BASE_DIR / 'reservas' / 'static',
     BASE_DIR / 'referencias' / 'static',
+    BASE_DIR / 'webpay' / 'static',
 ]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -138,4 +140,3 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/registro/login/'
-

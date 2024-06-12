@@ -8,6 +8,7 @@ class Reserva(models.Model):
     cantidad_personas = models.IntegerField(verbose_name="Cantidad de personas")
     cantidad_dias = models.SmallIntegerField(verbose_name="Cantidad de días", default=1)
     fecha_creacion = models.DateField(verbose_name="Fecha de reserva", auto_now=False, auto_now_add=False)
+    monto = models.IntegerField(verbose_name="Monto",default=0)
     terminosCondiciones = models.BooleanField(default=False, verbose_name="Términos y Condiciones")
     
     def __str__(self): 
