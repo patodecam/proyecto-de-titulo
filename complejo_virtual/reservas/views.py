@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from .forms import Formularioreserva
 from .models import Reserva
@@ -49,4 +49,55 @@ def reserva(request):
         form = Formularioreserva()
     
     return render(request, 'reserva.html', {'form': form})
+
+@login_required
+def lista_reservas(request):
+    if request.user.usuarioAdministrador:
+        reservas = Reserva.objects.all().order_by('fecha') 
+    else:
+        reservas = Reserva.objects.filter(rut=request.user).order_by('fecha')
+
+    return render(request, 'mis_reservas.html', {'reservas': reservas})
+
+@login_required
+def eliminar_reserva(request,id_reserva):
+    if not request.user.usuarioAdministrador:
+        return redirect('lista_reservas')
+    reserva = get_object_or_404(Reserva, id_reserva=id_reserva)
+    reserva.delete()
+    messages.success(request, 'Reserva eliminada exitosamente.')
+    return redirect('lista_reservas')
+
+
+@login_required
+def modificar_reserva(request, id_reserva):
+    if not request.user.usuarioAdministrador:
+        return redirect('listar_reservas')
+    reserva = get_object_or_404(Reserva, id_reserva=id_reserva)
+    if request.method == 'POST':
+        form = Formularioreserva(request.POST, id_reserva=id_reserva, is_edit=True)
+        if form.is_valid():
+            nueva_fecha = form.cleaned_data['fecha']
+            if nueva_fecha != reserva.fecha:
+                if Reserva.objects.filter(fecha=nueva_fecha).exists():
+                    form.add_error('fecha', 'Esta fecha ya está reservada.')
+                else:
+                    reserva.cantidad_personas = form.cleaned_data['cantidad_personas']
+                    reserva.fecha = nueva_fecha
+                    reserva.save()
+                    messages.success(request, 'Reserva actualizada exitosamente.')
+                    return redirect('lista_reservas')
+            else:
+                reserva.cantidad_personas = form.cleaned_data['cantidad_personas']
+                reserva.save()
+                messages.success(request, 'Reserva actualizada exitosamente.')
+                return redirect('lista_reservas')
+    else:
+        form = Formularioreserva(id_reserva=id_reserva, is_edit=True)
+    
+    return render(request, 'editar_reserva.html', {'form': form, 'reserva': reserva})
+ 
+
+    
+    
     

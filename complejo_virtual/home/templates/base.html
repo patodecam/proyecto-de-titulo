@@ -60,11 +60,14 @@
                               {{user.primerNombre}} {{user.primerApellido}}
                           </a>
                           <ul class="dropdown-menu dropdown-menu-end">
-                              <li><a class="dropdown-item" href="#"></a></li>
-                              <li><a class="dropdown-item" href="#"></a></li>
-                              <li><hr class="dropdown-divider"></li>
-                              <li><a class="dropdown-item" href="{% url 'cerrar_sesion' %}">Cerrar sesion</a></li>
-                          </ul>
+                            {% if user.usuarioAdministrador %}
+                                <li><a class="dropdown-item" href="{% url 'lista_reservas' %}">Lista de Reservas</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href="{% url 'lista_reservas' %}">Mis Reservas</a></li>
+                            {% endif %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a></li>
+                        </ul>
                       </li>
                     </ul>
                     {% else %}
@@ -75,7 +78,6 @@
                           </a>
                           <ul class="dropdown-menu dropdown-menu-end">
                               <li><a class="dropdown-item" href="{% url 'login' %}">Usuario</a></li>
-                              <li><a class="dropdown-item" href="#">Administrador</a></li>
                               <li><hr class="dropdown-divider"></li>
                               <li><a class="dropdown-item" href="{% url 'registro' %}">Registrarse</a></li>
                           </ul>

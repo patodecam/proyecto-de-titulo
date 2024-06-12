@@ -2,32 +2,7 @@ from django import forms
 from .models import Reserva
 from datetime import date, timedelta
 
-class Formularioreserva(forms.Form):
-    cantidad_personas = forms.IntegerField(
-        label='Cantidad de personas',
-        min_value=30,
-        max_value=200,
-        widget=forms.NumberInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': 'Ingrese la cantidad de personas',
-                'id': 'cantidadpersonas',
-                'required': 'required',
-            }
-        )
-    )
-    fecha = forms.DateField(
-        label='Fecha de reserva',
-        widget=forms.DateInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': 'Seleccione la fecha de reserva',
-                'id': 'fecha',
-                'type': 'date',
-                'required': 'required',
-            }
-        )
-    )
+class Formularioreserva(forms.ModelForm):
     aceptar_terminos = forms.BooleanField(
         label='Acepto los términos y condiciones',
         required=True,
@@ -38,6 +13,28 @@ class Formularioreserva(forms.Form):
             }
         )
     )
+    
+    
+    class Meta:
+        model = Reserva
+        fields = ['cantidad_personas', 'fecha']
+        widgets = {
+            'cantidad_personas': forms.NumberInput(attrs={'class': 'form-control'}),
+            'fecha': forms.DateInput(attrs={'class': 'form-control', 'type': 'date','required': 'required',}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        self.is_edit = kwargs.pop('is_edit', False)
+        self.id_reserva = kwargs.pop('id_reserva', None)
+        super(Formularioreserva, self).__init__(*args, **kwargs)
+        if self.id_reserva:
+            reserva = Reserva.objects.get(pk=self.id_reserva)
+            self.fields['cantidad_personas'].initial = reserva.cantidad_personas
+            self.fields['fecha'].initial = reserva.fecha
+            self.fields['aceptar_terminos'].initial = reserva.terminosCondiciones
+        
+        if self.is_edit:
+            self.fields.pop('aceptar_terminos', None)
 
     def clean_fecha(self):
         fecha = self.cleaned_data.get('fecha')
@@ -45,8 +42,13 @@ class Formularioreserva(forms.Form):
         diadereserva = hoy + timedelta(days=5)
         if fecha <= diadereserva:
             raise forms.ValidationError('La fecha de reserva debe ser al menos con 5 días de anticipación.')
-        if Reserva.objects.filter(fecha=fecha).exists():
-            raise forms.ValidationError('Esta fecha ya está reservada.')
+        if self.id_reserva:
+            reserva_actual = Reserva.objects.get(pk=self.id_reserva)
+            if fecha != reserva_actual.fecha and Reserva.objects.filter(fecha=fecha).exists():
+                raise forms.ValidationError('Esta fecha ya está reservada.')
+        else:
+            if Reserva.objects.filter(fecha=fecha).exists():
+                raise forms.ValidationError('Esta fecha ya está reservada.')
         return fecha
 
     def clean_cantidad_personas(self):
