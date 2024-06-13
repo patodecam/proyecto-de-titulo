@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'registro',
     'reservas',
     'core',
+    'referencias',
+    'webpay',
 ]
 
 MIDDLEWARE = [
@@ -130,6 +132,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'home' / 'static',
     BASE_DIR / 'registro' / 'static',
     BASE_DIR / 'reservas' / 'static',
+    BASE_DIR / 'referencias' / 'static',
+    BASE_DIR / 'webpay' / 'static',
 ]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'

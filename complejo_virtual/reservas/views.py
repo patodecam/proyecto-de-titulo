@@ -16,11 +16,14 @@ def reserva(request):
             fecha = form.cleaned_data['fecha']
             aceptar_terminos = form.cleaned_data['aceptar_terminos']
             usuario = request.user
-            reserva = Reserva(
-                cantidad_personas=cantidad_personas, 
-                fecha=fecha, 
+            totalPago = cantidad_personas * 5000
+
+            reserva = Reserva.objects.create(
+                cantidad_personas=cantidad_personas,
+                fecha=fecha,
                 rut=usuario,
-                terminosCondiciones=aceptar_terminos
+                terminosCondiciones=aceptar_terminos,
+                monto=totalPago
             )
             reserva.save()
             

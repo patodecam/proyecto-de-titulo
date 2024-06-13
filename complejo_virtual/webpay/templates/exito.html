@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Pago Exitoso{% endblock %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/exito.css' %}">
+{% endblock %}
+
+{% block content %}
+<body>
+    <header class="bg-success text-white text-center py-4">
+        <h1>Pago Exitoso</h1>
+    </header>
+    
+    <main class="container my-4 text-center">
+        <h2>¡Gracias por tu pago!</h2>
+        <p>Tu transacción ha sido completada exitosamente.</p>
+        <a href="{% url 'home' %}" class="btn btn-success btn-lg">Volver al inicio</a>
+    </main>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{% static 'js/exito.js' %}"></script>
+</body>
+{% endblock %}

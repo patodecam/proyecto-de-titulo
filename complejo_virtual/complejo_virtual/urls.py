@@ -23,5 +23,6 @@ urlpatterns = [
     path('', include('home.urls')),
     path('registro/', include('registro.urls')),
     path('reservas/', include('reservas.urls')), 
-    
+    path('referencias/', include('referencias.urls')),
+    path('pago/', include('webpay.urls')), 
 ]
