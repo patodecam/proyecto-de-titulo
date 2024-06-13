@@ -1,0 +1,113 @@
+/* Estilos para la cabecera */
+header {
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    animation: slideInDown 1s ease;
+}
+
+/* Estilos para el cuerpo principal */
+main.container {
+    margin-top: 40px;
+    animation: fadeIn 1s ease-in;
+}
+
+/* Estilos para el formulario de referencia */
+.referencia-form {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.referencia-form:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* Botón de enviar */
+.referencia-form button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.referencia-form button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
+
+/* Lista de comentarios */
+.lista-referencias {
+    margin-top: 40px;
+    animation: fadeIn 1s ease-in;
+}
+
+.lista-referencias h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #343a40;
+    animation: slideInLeft 1s ease;
+}
+
+.lista-referencias ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.lista-referencias li {
+    background: #ffffff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lista-referencias li:hover {
+    transform: translateX(10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Estilos adicionales para un toque moderno */
+.referencia-form input,
+.referencia-form textarea,
+.referencia-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.referencia-form input:focus,
+.referencia-form textarea:focus,
+.referencia-form select:focus {
+    border-color: #007bff;
+    outline: none;
+}

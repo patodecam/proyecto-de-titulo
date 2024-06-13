@@ -6,12 +6,11 @@
 {% endblock %}
 
 {% block content %}
-
 <body>
-    <header class="bg-success text-white text-center py-4">
+    <header class="bg-success text-white text-center py-4 animate__animated animate__fadeInDown">
         <h1>Bienvenido al Complejo</h1>
     </header>
-     <main class="container my-4">
+    <main class="container my-4">
         <!-- Carrusel de infografías -->
         <section id="infographics-carousel" class="mb-4">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -22,7 +21,7 @@
                 </div>
                 <div class="carousel-inner">
                     {% for infografia in infografias %}
-                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="carousel-item {% if forloop.first %}active{% endif %} animate__animated animate__zoomIn">
                             <img src="{% static infografia %}" class="d-block w-100" alt="Infografía {{ forloop.counter }}">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>Infografía {{ forloop.counter }}</h5>
@@ -44,25 +43,102 @@
 
         <!-- Párrafo introductorio -->
         <section id="intro-paragraph" class="mb-4">
-            <p>
+            <p class="animate__animated animate__fadeInUp">
                 Bienvenido al Complejo Virtual, el mejor lugar para tus vacaciones. Nuestra misión es proporcionar una experiencia inolvidable con los mejores servicios y comodidades.
             </p>
         </section>
 
-        <!-- Botón "Reservar" -->
-        <section id="reserve-button" class="mb-4">
-            <button class="btn btn-success" onclick="location.href='reservar.html'">Reservar</button>
-        </section>
-
         <!-- Calendario de fechas disponibles -->
-        <section id="calendar" class="mb-4">
-            <h2>Fechas Disponibles</h2>
-            <input type="text" id="datepicker" class="form-control">
-        </section>
+        <div id="calendar" class="card"></div>
     </main>
-
-{% block script%}
-    <script src="{% static 'js/home.js' %}"></script>
 {% endblock %}
-</body>
+
+{% block script %}
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.js'></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const calendarEl = document.getElementById('calendar');
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+      themeSystem: 'bootstrap5',
+      headerToolbar: {
+          left: 'prevYear,prev,next,nextYear today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      buttonText: {
+          today: 'Hoy',
+          month: 'Mes',
+          week: 'Semana',
+          day: 'Día',
+          list: 'Lista'
+      },
+      titleFormat: { year: 'numeric', month: 'long', day: 'numeric' },
+      navLinks: true,
+      editable: true,
+      selectable: true,
+      selectMirror: true,
+      locale: 'es',
+      eventColor: '#378006',
+      events: [
+          {% for reserva in reservas %}
+              {
+                  title: "Id de reserva: {{  reserva.id_reserva }}",
+                  start: '{{ reserva.fecha_creacion|date:"Y-m-d" }}',
+                  allDay: true
+              },
+          {% endfor %}
+      ],
+      select: function(arg) {
+          const title = prompt('Título del Evento:');
+          if (title) {
+              calendar.addEvent({
+                  title: title,
+                  start: arg.start,
+                  end: arg.end,
+                  allDay: arg.allDay
+              });
+          }
+          calendar.unselect();
+      },
+      eventClick: function(arg) {
+          if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
+              arg.event.remove();
+          }
+      },
+      eventMouseEnter: function(info) {
+          const tooltip = new Tooltip(info.el, {
+              title: info.event.title,
+              placement: 'top',
+              trigger: 'hover',
+              container: 'body'
+          });
+      },
+      eventMouseLeave: function(info) {
+          const tooltip = new Tooltip(info.el);
+          tooltip.dispose();
+      },
+      customButtons: {
+          addEventButton: {
+              text: 'Añadir Evento',
+              click: function() {
+                  const dateStr = prompt('Ingrese una fecha en formato YYYY-MM-DD');
+                  const date = new Date(dateStr + 'T00:00:00');
+                  if (!isNaN(date.valueOf())) {
+                      calendar.addEvent({
+                          title: 'Evento Añadido',
+                          start: date,
+                          allDay: true
+                      });
+                      alert('Evento añadido.');
+                  } else {
+                      alert('Fecha inválida.');
+                  }
+              }
+          }
+      }
+  });
+
+  calendar.render();
+});
+</script>
 {% endblock %}

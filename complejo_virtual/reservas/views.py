@@ -43,6 +43,7 @@ def reserva(request):
             try:
                 enviar_correo(destinatario, asunto, plantilla, contexto)
                 messages.success(request, 'Tu reserva ha sido creada exitosamente y se ha enviado un correo de confirmación.')
+                return redirect('iniciar_pago')
             except Exception as e:
                 messages.error(request, f'Error al enviar el correo de confirmación: {str(e)}')
         else:
