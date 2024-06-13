@@ -15,7 +15,7 @@
     <main class="container my-4">
         <!-- Carrusel de infografías -->
         <section id="infographics-carousel" class="mb-4">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                 <div class="carousel-indicators">
                     {% for infografia in infografias %}
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="carousel-inner">
                     {% for infografia in infografias %}
-                        <div class="carousel-item {% if forloop.first %}active{% endif %} animate__animated animate__zoomIn">
+                        <div class="carousel-item {% if forloop.first %}active{% endif %} animate__animated animate__fadeIn">
                             <img src="{% static infografia %}" class="d-block w-100" alt="Infografía {{ forloop.counter }}">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>Infografía {{ forloop.counter }}</h5>
@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
       titleFormat: { year: 'numeric', month: 'long', day: 'numeric' },
       navLinks: true,
       editable: true,
-      selectable: true,
       selectMirror: true,
       locale: 'es',
       eventColor: '#378006',
@@ -85,59 +84,11 @@ document.addEventListener('DOMContentLoaded', function() {
           {% for reserva in reservas %}
               {
                   title: "Id de reserva: {{  reserva.id_reserva }}",
-                  start: '{{ reserva.fecha_creacion|date:"Y-m-d" }}',
+                  start: '{{ reserva.fecha|date:"Y-m-d" }}',
                   allDay: true
               },
           {% endfor %}
-      ],
-      select: function(arg) {
-          const title = prompt('Título del Evento:');
-          if (title) {
-              calendar.addEvent({
-                  title: title,
-                  start: arg.start,
-                  end: arg.end,
-                  allDay: arg.allDay
-              });
-          }
-          calendar.unselect();
-      },
-      eventClick: function(arg) {
-          if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
-              arg.event.remove();
-          }
-      },
-      eventMouseEnter: function(info) {
-          const tooltip = new Tooltip(info.el, {
-              title: info.event.title,
-              placement: 'top',
-              trigger: 'hover',
-              container: 'body'
-          });
-      },
-      eventMouseLeave: function(info) {
-          const tooltip = new Tooltip(info.el);
-          tooltip.dispose();
-      },
-      customButtons: {
-          addEventButton: {
-              text: 'Añadir Evento',
-              click: function() {
-                  const dateStr = prompt('Ingrese una fecha en formato YYYY-MM-DD');
-                  const date = new Date(dateStr + 'T00:00:00');
-                  if (!isNaN(date.valueOf())) {
-                      calendar.addEvent({
-                          title: 'Evento Añadido',
-                          start: date,
-                          allDay: true
-                      });
-                      alert('Evento añadido.');
-                  } else {
-                      alert('Fecha inválida.');
-                  }
-              }
-          }
-      }
+      ]
   });
 
   calendar.render();

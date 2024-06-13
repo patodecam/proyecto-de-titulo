@@ -6,86 +6,76 @@
 {% endblock %}
 
 {% block content %}
+
 <body>
+    
     <main>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card mt-5 animate__animated animate__fadeInDown">
-                        <div class="card-header text-center">
-                            <h3>Registro</h3>
-                            <p class="text-muted">Crea tu cuenta y únete a nosotros</p>
-                        </div>
-                        <div class="card-body">
-                            <form method="POST" id="formularioRegistro">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <label for="primerNombre">Primer Nombre:</label>
-                                    <input type="text" id="primerNombre" name="primerNombre" placeholder="Ingrese su primer nombre." class="form-control animate__animated animate__fadeInLeft" minlength="3" maxlength="20">
-                                    <div class="error-message" id="errorPrimerNombre"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="segundoNombre">Segundo Nombre:</label>
-                                    <input type="text" id="segundoNombre" name="segundoNombre" placeholder="Ingrese su segundo nombre." class="form-control animate__animated animate__fadeInRight" minlength="3" maxlength="20">
-                                    <div class="error-message" id="errorSegundoNombre"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="primerApellido">Primer Apellido:</label>
-                                    <input type="text" id="primerApellido" name="primerApellido" placeholder="Ingrese su primer apellido." class="form-control animate__animated animate__fadeInLeft" minlength="3" maxlength="20">
-                                    <div class="error-message" id="errorPrimerApellido"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="segundoApellido">Segundo Apellido:</label>
-                                    <input type="text" id="segundoApellido" name="segundoApellido" placeholder="Ingrese su segundo apellido." class="form-control animate__animated animate__fadeInRight" minlength="3" maxlength="20">
-                                    <div class="error-message" id="errorSegundoApellido"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="rut">Rut:</label>
-                                    <input type="number" id="rut" name="rut" placeholder="Ingrese su rut." class="form-control animate__animated animate__fadeInLeft" minlength="8" maxlength="8">
-                                    <div class="error-message" id="errorRut"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="dv">DV:</label>
-                                    <input type="text" id="dv" name="dv" placeholder="Ingrese el digito verificador" class="form-control animate__animated animate__fadeInRight" maxlength="1" pattern="[0-9Kk]">
-                                    <div class="error-message" id="errorDv"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="correo">Correo Electrónico:</label>
-                                    <input type="email" id="correo" name="correo" placeholder="Ingrese su correo electrónico" class="form-control animate__animated animate__fadeInLeft">
-                                    <div class="error-message" id="errorCorreo"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password1">Contraseña:</label>
-                                    <input type="password" id="password1" name="password1" placeholder="Ingrese su contraseña" minlength="8" class="form-control animate__animated animate__fadeInRight">
-                                    <small id="passwordHelp" class="text-help">
-                                        La contraseña debe tener al menos 8 caracteres y contener al menos una letra minúscula, una letra mayúscula, un número y uno de los siguientes caracteres especiales: @, $, !, %, *, ?, &.
-                                    </small>
-                                    <div class="error-message" id="errorPassword1"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password2">Confirmar Contraseña:</label>
-                                    <input type="password" id="password2" name="password2" placeholder="Confirme su contraseña" class="form-control animate__animated animate__fadeInLeft">
-                                    <div class="error-message" id="errorPassword2"></div>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" id="terminosCondiciones" name="terminosCondiciones" class="form-check-input animate__animated animate__fadeInRight">
-                                    <label for="terminosCondiciones" class="form-check-label">Acepto los términos y condiciones</label>
-                                    <div class="error-message" id="errorTerminosCondiciones"></div>
-                                </div>
-                                <div class="btn-contenedor">
-                                    <button type="submit" id="btn-registrar" class="btn btn-primary btn-block animate__animated animate__fadeInUp">Registrarse</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+        <div class="container-md">
+            <form method="POST" id="formularioRegistro">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="primerNombre">Primer Nombre: </label>
+                    <input type="text" id="primerNombre" name="primerNombre" placeholder="Ingrese su primer nombre." class="form-control" minlength="3" maxlength="20" >
+                    <div class="error-message" id="errorPrimerNombre"></div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="segundoNombre">Segundo Nombre: </label>
+                    <input type="text" id="segundoNombre" name="segundoNombre" placeholder="Ingrese su segundo nombre." class="form-control" minlength="3" maxlength="20" >
+                    <div class="error-message" id="errorSegundoNombre"></div>
+                </div>
+                <div class="form-group">
+                    <label for="primerApellido">Primer Apellido: </label>
+                    <input type="text" id="primerApellido" name="primerApellido" placeholder="Ingrese su primer apellido." class="form-control" minlength="3" maxlength="20">
+                    <div class="error-message" id="errorPrimerApellido"></div>
+                </div>
+                <div class="form-group">
+                    <label for="segundoApellido">Segundo Apellido: </label>
+                    <input type="text" id="segundoApellido" name="segundoApellido" placeholder="Ingrese su segundo apellido."  class="form-control" minlength="3" maxlength="20" >
+                    <div class="error-message" id="errorSegundoApellido"></div>
+                </div>
+                <div class="form-group">
+                    <label for="rut">Rut: </label>
+                    <input type="number" id="rut" name="rut" placeholder="Ingrese su rut."  class="form-control" minlength="8" maxlength="8" >
+                    <div class="error-message" id="errorRut"></div>
+                </div>
+                <div class="form-group">
+                    <label for="dv">DV: </label>
+                    <input type="text" id="dv" name="dv" placeholder="Ingrese el digito verificador"  class="form-control" maxlength="1" pattern="[0-9Kk]" >
+                    <div class="error-message" id="errorDv"></div>
+                
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo electronico: </label>
+                    <input type="email" id="correo" name="correo" placeholder="Ingrese su correo electronico"  class="form-control" >
+                    <div class="error-message" id="errorCorreo"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password1">Contraseña: </label>
+                    <input type="password" id="password1" name="password1" placeholder="Ingrese su contraseña"   minlength="8" class="form-control">
+                    <small id="passwordHelp" class="text-help">
+                        La contraseña debe tener al menos 8 caracteres y contener al menos una letra minúscula, una letra mayúscula, un número y uno de los siguientes caracteres especiales: @, $, !, %, *, ?, &.
+                    </small>
+                    <div class="error-message" id="errorPassword1"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password2">Confirmar Contraseña: </label>
+                    <input type="password" id="password2" name="password2" placeholder="Confirme su contraseña"  class="form-control">
+                    <div class="error-message" id="errorPassword2"></div>
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" id="terminosCondiciones" name="terminosCondiciones" class="form-check-input" >
+                    <label for="terminosCondiciones" class="form-check-label">Acepto los términos y condiciones</label>
+                    <div class="error-message" id="errorTerminosCondiciones"></div>
+                </div>
+                <div class="btn-contenedor">
+                <button type="submit" id="btn-registrar" class="btn btn-primary">Registrarse</button>
+                </div>
+                
+            </form>
         </div>
     </main>
-
     {% block script %}
     <script src="{% static 'js/registro.js' %}"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     {% endblock %}
 </body>
 {% endblock %}

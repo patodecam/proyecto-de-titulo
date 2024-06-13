@@ -2,6 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # otras rutas
-    path('referencia', views.referencias, name='referencia'),
+    path('', views.referencias, name='referencias'),
+    path('enviar/', views.enviar_referencia, name='enviar_referencia'),
 ]

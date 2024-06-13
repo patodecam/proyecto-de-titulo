@@ -14,7 +14,7 @@
     </header>
     
     <main class="container my-4">
-        <form method="post" action="{% url 'iniciar_pago' %}" class="pago-form">
+        <form method="post" action="{% url 'iniciar_pago' reserva_id=reserva_id %}" class="pago-form">
             {% csrf_token %}
             <button type="submit" class="btn btn-primary btn-lg btn-block">Pagar con Webpay</button>
         </form>

@@ -20,7 +20,7 @@
                 {% for referencia in referencias %}
                     <li>
                         <strong>{{ referencia.usuario.primerNombre }} {{ referencia.usuario.primerApellido }}</strong> - 
-                        {{ referencia.comentario }} - 
+                        {{ referencia.comentario|escape }} - 
                         <em>Escala del servicio: {{ referencia.escala_servicio }}</em> - 
                         <small>{{ referencia.fecha_creacion }}</small>
                     </li>
@@ -28,11 +28,15 @@
             </ul>
         </div>
         <div class="referencia-form">
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Enviar Referencia</button>
-            </form>
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'enviar_referencia' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Enviar Referencia</button>
+                </form>
+            {% else %}
+                <p>Debes <a href="{% url 'login' %}">iniciar sesión</a> para dejar un comentario.</p>
+            {% endif %}
         </div>
     </main>
     

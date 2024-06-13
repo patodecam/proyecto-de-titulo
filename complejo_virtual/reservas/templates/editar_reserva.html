@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Editar reserva{% endblock %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/editar_reserva.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3 class="my-4" style="text-align: center; color: #B19470; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 35px;">
+        Editar Reserva
+    </h3>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.cantidad_personas.label_tag }}
+            {{ form.cantidad_personas }}
+            <div class="text-help">{{ form.cantidad_personas.help_text }}</div>
+        </div>
+        <div class="form-group">
+            {{ form.fecha.label_tag }}
+            {{ form.fecha }}
+            <div class="text-help">{{ form.fecha.help_text }}</div>
+        </div>
+        </div>
+        <div class="btn-contenedor">
+            <button type="submit" id="btn-registrar" class="btn btn-primary">Confirmar Cambios</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
