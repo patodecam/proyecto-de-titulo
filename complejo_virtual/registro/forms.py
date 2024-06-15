@@ -1,8 +1,11 @@
 import re
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm,PasswordResetForm, SetPasswordForm
 from django.contrib.auth import authenticate
+from django.contrib.auth import get_user_model
 from .models import Usuario
+
+User = get_user_model()
 
 class Formularioregistro(forms.ModelForm):
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput(
@@ -197,9 +200,34 @@ class Formulariologin(AuthenticationForm):
             elif not self.user_cache.is_active:
                 raise forms.ValidationError('Esta cuenta está inactiva.')
         return self.cleaned_data
-      
+ 
+class Formulariorecuperacion(PasswordResetForm):
+    email= forms.EmailField(
+        max_length=254,
+        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
+    )
     
-        
-    
-    
-        
+    def clean_correo(self):
+        correo = self.cleaned_data.get('correo')
+        if not User.objects.filter(correo=correo).exists():
+            raise forms.ValidationError('No existe ningún usuario registrado con este correo electrónico.')
+        return correo
+
+class Formulariodecambio(SetPasswordForm):
+    new_password1 = forms.CharField(
+        label='New password',
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'New password'}),
+        strip=False,
+    )
+    new_password2 = forms.CharField(
+        label='Confirm new password',
+        strip=False,
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm new password'}),
+    )     
+
+    def clean_new_password2(self):
+        new_password1 = self.cleaned_data.get('new_password1')
+        new_password2 = self.cleaned_data.get('new_password2')
+        if new_password1 and new_password2 and new_password1 != new_password2:
+            raise forms.ValidationError('Las contraseñas no coinciden.')
+        return new_password2
