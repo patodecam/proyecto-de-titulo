@@ -1,0 +1,36 @@
+/* General styles for the summary page */
+.container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.card {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: #1E0342;
+}
+
+.card-text {
+    font-size: 2rem;
+    color: #8B4513;
+}
+
+.btn-primary, .btn-success {
+    border-radius: 20px;
+}
+
+.btn-primary:hover, .btn-success:hover {
+    background-color: #03AED2;
+    border-color: #03AED2;
+    color: white;
+}

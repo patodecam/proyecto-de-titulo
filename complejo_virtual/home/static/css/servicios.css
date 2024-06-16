@@ -81,6 +81,30 @@ main {
     margin-bottom: 20px;
 }
 
+/* Estilos para la sección del mapa */
+#location {
+    padding: 20px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 450px;
+    border: 0;
+}
+
 /* Animaciones */
 .section-title {
     animation: fadeIn 1s ease-in-out;

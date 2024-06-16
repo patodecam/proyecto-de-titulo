@@ -4,7 +4,7 @@ from django.contrib import messages
 from .forms import Formularioreserva
 from .models import Reserva
 from core.email_sender import enviar_correo
-import datetime
+from django.db.models import Sum
 # Create your views here.
 
 @login_required
@@ -51,7 +51,9 @@ def reserva(request):
     else:
         form = Formularioreserva()
     
-    return render(request, 'reserva.html', {'form': form})
+    reservas = Reserva.objects.all()
+
+    return render(request, 'reserva.html', {'reservas': reservas, 'form': form})
 
 
 @login_required
@@ -100,3 +102,26 @@ def modificar_reserva(request, id_reserva):
         form = Formularioreserva(id_reserva=id_reserva, is_edit=True)
     
     return render(request, 'editar_reserva.html', {'form': form, 'reserva': reserva})
+
+@login_required
+def resumen_ejecutivo(request):
+    if not request.user.usuarioAdministrador:
+        return redirect('home')
+
+    fecha_inicio = request.GET.get('fecha_inicio')
+    fecha_fin = request.GET.get('fecha_fin')
+    
+    reservas = Reserva.objects.all()
+
+    if fecha_inicio and fecha_fin:
+        reservas = reservas.filter(fecha__range=[fecha_inicio, fecha_fin])
+
+    total_reservas = reservas.count()
+    ingresos_totales = reservas.aggregate(total_monto=Sum('monto'))['total_monto'] or 0
+
+    context = {
+        'total_reservas': total_reservas,
+        'ingresos_totales': ingresos_totales,
+    }
+    
+    return render(request, 'resumen_ejecutivo.html', context)

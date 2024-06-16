@@ -67,3 +67,10 @@
 .btn-eliminar:hover {
     background-color: #c9302c;
 }
+
+.centered-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px; /* Ajustado para centrarlo mejor */
+}

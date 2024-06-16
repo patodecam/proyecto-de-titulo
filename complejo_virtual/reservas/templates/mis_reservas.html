@@ -56,8 +56,13 @@
                 {% endif %}
             </div>
             {% endif %}
-
-        
+            
+            {% if user.usuarioAdministrador %}
+                <div class="centered-btn">
+                    <a href="{% url 'resumen_ejecutivo' %}" class="btn btn-primary btn-lg">Resumen Ejecutivo</a>
+                </div>
+            {% endif %}
+            
     </main>
 
 </body>
