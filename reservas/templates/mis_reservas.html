@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Lista reservas{% endblock %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mis_reservas.css' %}">
+{% endblock %}
+{% block content %}
+<body>
+    <main>
+        <div class="container">
+            <div>
+                <h3 class="my-4">{% if user.usuarioAdministrador %}Lista de Reservas{% else %}Mis Reservas{% endif %}</h3>
+            </div>
+            {% if reservas %}
+            <div class="table-responsive">
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            {% if user.usuarioAdministrador %}
+                            <th>Usuario</th>
+                            {% endif %}
+                            <th>ID Reserva</th>
+                            <th>Fecha</th>
+                            <th>Cantidad de Personas</th>
+                            {% if user.usuarioAdministrador %}
+                            <th></th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reserva in reservas %}
+                        <tr>
+                            {% if user.usuarioAdministrador %}
+                            <td>{{ reserva.rut }}</td>
+                            {% endif %}
+                            <td>{{ reserva.id_reserva }}</td>
+                            <td>{{ reserva.fecha }}</td>
+                            <td>{{ reserva.cantidad_personas }}</td>
+                            {% if user.usuarioAdministrador %}
+                            <td>
+                                <a href="{% url 'modificar_reserva' reserva.id_reserva %}" class="btn-editar">Editar</a>
+                                <a href="{% url 'eliminar_reserva' reserva.id_reserva %}" class="btn-eliminar" onclick="return confirm('¿Estás seguro de eliminar esta reserva?');">Eliminar</a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="alert alert-info" role="alert">
+                {% if user.usuarioAdministrador %}
+                No hay reservas.
+                {% else %}
+                No tienes reservas.
+                {% endif %}
+            </div>
+            {% endif %}
+            
+            {% if user.usuarioAdministrador %}
+                <div class="centered-btn">
+                    <a href="{% url 'resumen_ejecutivo' %}" class="btn btn-primary btn-lg">Resumen Ejecutivo</a>
+                </div>
+            {% endif %}
+            
+    </main>
+
+</body>
+{% endblock %}

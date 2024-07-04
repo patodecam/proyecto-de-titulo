@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Resumen Ejecutivo{% endblock %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/resumen.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center">Resumen Ejecutivo</h1>
+    <div class="row my-4">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total de Reservas</h5>
+                    <p class="card-text">{{ total_reservas }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Ingresos Totales</h5>
+                    <p class="card-text">${{ ingresos_totales }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form method="get" action="{% url 'resumen_ejecutivo' %}">
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <input type="date" name="fecha_inicio" class="form-control" placeholder="Fecha Inicio" value="{{ request.GET.fecha_inicio }}">
+            </div>
+            <div class="col-md-4">
+                <input type="date" name="fecha_fin" class="form-control" placeholder="Fecha Fin" value="{{ request.GET.fecha_fin }}">
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+            </div>
+        </div>
+    </form>
+    <div class="text-center mb-3">
+        <button id="generar-reporte" class="btn btn-success">Generar Reporte</button>
+    </div>
+</div>
+{% block script %}
+<script src="{% static 'js/resumen.js' %}"></script>
+{% endblock %}
+{% endblock %}

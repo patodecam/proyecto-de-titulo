@@ -1,0 +1,125 @@
+body {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #3498db;
+}
+
+.header .navbar-brand, .header .nav-link {
+    color: white !important;
+}
+
+.section-title {
+    color: #3498db;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+#services p, #business-rules ul {
+    margin: 20px auto;
+    padding: 0 15%;
+    line-height: 1.6;
+}
+
+ul {
+    list-style-type: disc;
+    margin: 20px 0;
+    padding-left: 40px;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    background-color: #2ecc71;
+    border: none;
+    padding: 15px 30px; /* Ajustado para un tamaño mayor del botón */
+    border-radius: 30px; /* Botón redondeado */
+    cursor: pointer; /* Cambiar el cursor al pasar por encima */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición para suavizar cambios */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para el botón */
+}
+
+.btn-primary:hover {
+    background-color: #27ae60; /* Cambio de color al pasar el ratón por encima */
+    transform: translateY(-3px); /* Efecto de elevación al pasar el ratón por encima */
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    border: none;
+}
+
+.centered-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px; /* Ajustado para centrarlo mejor */
+}
+
+main {
+    padding: 40px 20px; /* Espaciado interno para el contenido principal */
+    max-width: 1200px; /* Ancho máximo para un mejor centrado */
+    margin: 0 auto; /* Centrar el main */
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+#services, #business-rules {
+    padding: 20px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Estilos para la sección del mapa */
+#location {
+    padding: 20px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 450px;
+    border: 0;
+}
+
+/* Animaciones */
+.section-title {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+main p, main ul {
+    animation: slideIn 1s ease-in-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

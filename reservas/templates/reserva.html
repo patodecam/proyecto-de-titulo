@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}Reservar{% endblock %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/reserva.css' %}">
+<style>
+    /* Estilos adicionales para el título y la descripción */
+    .titulo-reserva {
+        text-align: center;
+        color: var(--main-color);
+        margin-bottom: 10px;
+    }
+
+    .descripcion-reserva {
+        text-align: center;
+        color: #666;
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<main>
+    <div class="container-md">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Título y descripción -->
+        <h1 class="titulo-reserva">¡Reserva tu cupo ahora!</h1>
+        <p class="descripcion-reserva">Complete el formulario para asegurar su lugar.</p>
+
+        <!-- Formulario de reserva -->
+        <form method="POST" id="formularioReserva">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="cantidad_personas">Cantidad de personas:</label>
+                <input type="number" id="cantidad_personas" name="cantidad_personas" placeholder="Ingrese la cantidad de personas" class="form-control">
+                <div class="error-message" id="errorCantidadPersonas"></div>
+            </div>
+            <div class="form-group">
+                <label for="fecha">Fecha de reserva:</label>
+                <input type="date" id="fecha" name="fecha" placeholder="Seleccione la fecha de reserva" class="form-control">
+                <div class="error-message" id="errorFecha"></div>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" id="aceptar_terminos" name="aceptar_terminos" class="form-check-input">
+                <label for="aceptar_terminos" class="form-check-label">Acepto los términos y condiciones</label>
+                <div class="error-message" id="errorTerminosCondiciones"></div>
+            </div>
+            <div class="btn-contenedor">
+                <button type="submit" id="btn-reservar" class="btn btn-primary">Reservar</button>
+            </div>
+        </form>
+        <div id="calendar" class="card"></div>
+    </div>
+</main>
+{% block script %}
+<script src="{% static 'js/reserva.js' %}"></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.js'></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const calendarEl = document.getElementById('calendar');
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        themeSystem: 'bootstrap5',
+        headerToolbar: {
+            left: 'prevYear,prev,next,nextYear today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        buttonText: {
+            today: 'Hoy',
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Día',
+            list: 'Lista'
+        },
+        titleFormat: { year: 'numeric', month: 'long', day: 'numeric' },
+        navLinks: true,
+        editable: true,
+        selectMirror: true,
+        locale: 'es',
+        eventColor: '#378006',
+        events: [
+            {% for reserva in reservas %}
+                {
+                    title: "Id de reserva: {{  reserva.id_reserva }}",
+                    start: '{{ reserva.fecha|date:"Y-m-d" }}',
+                    allDay: true
+                },
+            {% endfor %}
+        ]
+    });
+
+    calendar.render();
+});
+</script>
+{% endblock %}
+{% endblock %}

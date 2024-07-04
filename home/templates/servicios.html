@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Servicios{% endblock %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/servicios.css' %}">
+{% endblock %}
+
+{% block content %}
+<body>
+    <header class="bg-success text-white text-center py-4">
+        <h1>Servicios</h1>
+    </header>
+    
+    <main class="container my-4">
+        <!-- Explanation of Services -->
+        <section id="services">
+            <h2 class="section-title">Explicación de los Servicios</h2>
+            <p>En nuestro complejo digital, ofrecemos una variedad de servicios para satisfacer sus necesidades. Puede reservar piscinas, acceder a instalaciones deportivas y disfrutar de eventos especiales organizados en nuestras instalaciones.</p>
+            <ul>
+                <li>Piscinas</li>
+                <li>Quinchos</li>
+                <li>Horno de barro</li>
+                <li>Áreas Verdes</li>
+            </ul>
+        </section>
+
+        <!-- Business Rules -->
+        <section id="business-rules" class="mt-5">
+            <h2 class="section-title">Reglas del Negocio</h2>
+            <ul>
+                <li>Las reservas deben realizarse con al menos 5 dias de antelación.</li>
+                <li>Las cancelaciones deben notificarse con un mínimo de 12 horas de antelación.</li>
+                <li>El uso de las instalaciones está sujeto a las normas y regulaciones del complejo.</li>
+            </ul>
+        </section>
+
+        <!-- Google Maps Section -->
+        <section id="location" class="mt-5">
+            <h2 class="section-title">Ubicación</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBIxFMwmHzjY7Dc2VWASb0EESxFlNanlq0&q=Cam.+Al+Volc%C3%A1n+16295,+Guayacan,+San+Jos%C3%A9+de+Maipo,+Regi%C3%B3n+Metropolitana" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+
+        <div class="centered-btn">
+            <a href="{% url 'reserva' %}" class="btn btn-primary btn-lg">Reservar ahora</a>
+        </div>
+    </main>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{% static 'js/servicios.js' %}"></script>
+</body>
+{% endblock %}

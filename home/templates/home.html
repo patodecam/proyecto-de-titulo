@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+{% endblock %}
+
+{% block content %}
+<body>
+    <header class="bg-success text-white text-center py-4 animate__animated animate__fadeInDown">
+        <h1>Bienvenido al Complejo</h1>
+    </header>
+    <main class="container my-4">
+        <!-- Carrusel de infografías -->
+        <section id="infographics-carousel" class="mb-4">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                <div class="carousel-indicators">
+                    {% for infografia in infografias %}
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
+                    {% endfor %}
+                </div>
+                <div class="carousel-inner">
+                    {% for infografia in infografias %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %} animate__animated animate__fadeIn">
+                            <img src="{% static infografia %}" class="d-block w-100" alt="Infografía {{ forloop.counter }}">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Infografía {{ forloop.counter }}</h5>
+                                <p>Descripción de la infografía {{ forloop.counter }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Párrafo introductorio -->
+        <section id="intro-paragraph" class="mb-4">
+            <p class="animate__animated animate__fadeInUp">
+                Bienvenido al Complejo Virtual, el mejor lugar para tus vacaciones. Nuestra misión es proporcionar una experiencia inolvidable con los mejores servicios y comodidades.
+            </p>
+        </section>
+
+        <!-- Calendario de fechas disponibles -->
+        <div id="calendar" class="card"></div>
+    </main>
+{% endblock %}
+
+{% block script %}
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.js'></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const calendarEl = document.getElementById('calendar');
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+      themeSystem: 'bootstrap5',
+      headerToolbar: {
+          left: 'prevYear,prev,next,nextYear today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      buttonText: {
+          today: 'Hoy',
+          month: 'Mes',
+          week: 'Semana',
+          day: 'Día',
+          list: 'Lista'
+      },
+      titleFormat: { year: 'numeric', month: 'long', day: 'numeric' },
+      navLinks: true,
+      editable: true,
+      selectMirror: true,
+      locale: 'es',
+      eventColor: '#378006',
+      events: [
+          {% for reserva in reservas %}
+              {
+                  title: "Id de reserva: {{  reserva.id_reserva }}",
+                  start: '{{ reserva.fecha|date:"Y-m-d" }}',
+                  allDay: true
+              },
+          {% endfor %}
+      ]
+  });
+
+  calendar.render();
+});
+</script>
+{% endblock %}
